@@ -1,5 +1,11 @@
 import React from "react";
-import { View, StyleSheet, Image } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Image,
+} from "react-native";
+
+import * as Yup from "yup";
 
 import AppText from "../components/AppText";
 import AppForm from "../components/forms/Appform";
@@ -7,6 +13,12 @@ import AppFormField from "../components/forms/AppFormField";
 import SubmitButton from "../components/forms/SubmitButton";
 import colors from "../config/colors";
 import Screen from "./Screen";
+
+const validationSchema = Yup.object().shape({
+    email: Yup.string().required().email().label("Email"),
+    password: Yup.string().required().min(8).label("Password"),
+  });
+  
 
 function LoginScreen() {
   return (
@@ -19,6 +31,7 @@ function LoginScreen() {
       <AppForm
         initialValues={{ email: "", password: "" }}
         onSubmit={() => console.log("login")}
+        validationSchema={validationSchema}
       >
         <AppFormField
           name="email"
