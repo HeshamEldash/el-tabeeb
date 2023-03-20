@@ -7,12 +7,15 @@ import WelcomeScreen from "./screens/WelcomeScreen.js";
 import AppTextInput from "./components/AppTextInput.js";
 import Screen from "./screens/Screen.js";
 import LoginScreen from "./screens/LoginScreen.js";
+import RegistrationScreen from "./screens/RegistrationScreen.js";
+import ProfileRegistrationScreen from "./screens/ProfileRegistrationScreen.js";
 
 export default function App() {
   return (
       // <WelcomeScreen/>
-      <LoginScreen/>
-
+      // <LoginScreen/>
+      // <RegistrationScreen/>
+<ProfileRegistrationScreen/>
 
     // <AppTextInput
 
