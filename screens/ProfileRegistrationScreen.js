@@ -1,11 +1,12 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import DateTimePicker from '@react-native-community/datetimepicker';
+import {Picker} from '@react-native-picker/picker';
 
 import AppForm from "../components/forms/Appform";
 import AppFormField from "../components/forms/AppFormField";
 import Screen from "./Screen";
-import AppDatePicker from "../components/AppDatePicker";
+import FormDatePicker from "../components/forms/FormDatePicker";
+import SubmitButton from "../components/forms/SubmitButton";
 
 function ProfileRegistrationScreen(props) {
   return (
@@ -19,6 +20,7 @@ function ProfileRegistrationScreen(props) {
           gender: "",
           telephoneNumber: "",
         }}
+        onSubmit={(values) => console.log(values)}
       >
         <AppFormField
           name="first_name"
@@ -30,11 +32,7 @@ function ProfileRegistrationScreen(props) {
           icon="account"
           placeholder="Middle Names"
         />
-        <AppFormField
-          name="last_name"
-          icon="account"
-          placeholder="Last Name"
-        />
+        <AppFormField name="last_name" icon="account" placeholder="Last Name" />
 
         <AppFormField
           name="gender"
@@ -42,12 +40,11 @@ function ProfileRegistrationScreen(props) {
           placeholder="Gender"
         />
 
+        <FormDatePicker name="date_of_birth" />
 
 
 
-
-        <AppDatePicker/>
-
+        <SubmitButton />
       </AppForm>
     </Screen>
   );

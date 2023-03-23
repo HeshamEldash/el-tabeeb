@@ -6,18 +6,18 @@ import defaultStyles from "../config/styles";
 import AppText from "./AppText";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-function AppDatePicker({ placeholder = "Select Date", handleSubmit }) {
-    
-  const [date, setDate] = useState();
+function AppDatePicker({ placeholder = "Select Date", handleSubmit, onClick }) {
+  const [date, setDate] = useState(null);
   const [open, setOpen] = useState(false);
 
   const handleDateChange = (event, selectedDate) => {
-    setDate(selectedDate);
     setOpen(false);
+    setDate(selectedDate);
     handleSubmit(selectedDate);
   };
   const openDatePicker = () => {
     setOpen(true);
+    onClick && onClick()
   };
 
   return (
@@ -29,9 +29,11 @@ function AppDatePicker({ placeholder = "Select Date", handleSubmit }) {
           color={defaultStyles.colors.medium}
           style={styles.icon}
         />
-        {date && <AppText>{date.toLocaleDateString()}</AppText>}
+        {date != null && <AppText>{date.toLocaleDateString()}</AppText>}
 
-        {!date && <AppText style={styles.placeholder}>{placeholder}</AppText>}
+        {date === null && (
+          <AppText style={styles.placeholder}>{placeholder}</AppText>
+        )}
 
         {open && (
           <DateTimePicker
@@ -57,9 +59,6 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: 10,
-  },
-  inputBox: {
-    width: "100%",
   },
   placeholder: {
     color: defaultStyles.colors.medium,
