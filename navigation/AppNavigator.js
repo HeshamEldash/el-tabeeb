@@ -1,12 +1,13 @@
 import React from "react";
-import {StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
 
 import SectionsScreen from "../screens/SectionsScreen";
 import WelcomeScreen from "../screens/WelcomeScreen";
 import colors from "../config/colors";
+import SectionsNavigator from "./SectionsNavigator";
+import AuthNavigator from "./AuthNavigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -20,16 +21,17 @@ function AppNavigator() {
     >
       <Tab.Screen
         name="Home"
-        component={SectionsScreen}
+        component={SectionsNavigator}
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="account" color={color} size={size} />
           ),
         }}
       />
+
       <Tab.Screen
-        name="Account"
-        component={WelcomeScreen}
+        name="Auth"
+        component={AuthNavigator}
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="account" color={color} size={size} />

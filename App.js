@@ -23,7 +23,7 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer theme={navigationTheme}>
+    <NavigationContainer theme={navigationTheme} >
 
       {/* <AuthNavigator/> */}
       <AppNavigator/>

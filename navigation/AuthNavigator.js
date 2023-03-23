@@ -7,15 +7,13 @@ import ProfileRegistrationScreen from "../screens/ProfileRegistrationScreen";
 
 import { StyleSheet } from "react-native";
 import colors from "../config/colors";
+import { screenOptions } from "./navigationTheme";
 
 const Stack = createNativeStackNavigator();
 
 const AuthNavigator = () => (
   <Stack.Navigator
-    screenOptions={{
-      headerStyle: styles.headerStyle,
-      headerShadowVisible: false,
-    }}
+    screenOptions={screenOptions}
   >
     <Stack.Screen
       name="Welcome"
