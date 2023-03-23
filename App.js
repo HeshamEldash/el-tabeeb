@@ -1,4 +1,6 @@
 import { StyleSheet, TextInput } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+
 import SectionsScreen from "./screens/SectionsScreen.js";
 import StartScreen from "./screens/StartScreen.js";
 import MedicationsScreen from "./screens/MedicationsScreen.js";
@@ -12,34 +14,21 @@ import ProfileRegistrationScreen from "./screens/ProfileRegistrationScreen.js";
 import AppPicker from "./components/AppPicker.js";
 import AppDatePicker from "./components/AppDatePicker.js";
 import { useState } from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import AuthNavigator from "./navigation/AuthNavigator.js";
+import navigationTheme from "./navigation/navigationTheme.js";
+import AppNavigator from "./navigation/AppNavigator.js";
 
-const gender = [
-  { value: "M", name: "Male" },
-  { value: "F", name: "Female" },
-];
+const Stack = createNativeStackNavigator();
+
 export default function App() {
-  const [selectedGender, setSelectedGender] = useState();
   return (
-    // <WelcomeScreen/>
-    // <LoginScreen/>
-    // <RegistrationScreen/>
+    <NavigationContainer theme={navigationTheme}>
 
-    // <AppTextInput
-
-    // />
-    <Screen style={styles.screen}>
-      <AppPicker
-        items={gender}
-        selectedItem={selectedGender}
-        setSelectedItem={setSelectedGender}
-      />
-      <AppDatePicker />
-    </Screen>
+      {/* <AuthNavigator/> */}
+      <AppNavigator/>
+    </NavigationContainer>
   );
-}
-
-{
-  /* <ProfileRegistrationScreen/>  */
 }
 const styles = StyleSheet.create({
   screen: {

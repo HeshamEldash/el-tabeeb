@@ -31,8 +31,8 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontWeight: "800",
-    fontSize: 20,
-    marginBottom: 5,
+    fontSize: 15,
+    marginBottom: 20,
     textTransform:"capitalize"
     
   },

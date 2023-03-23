@@ -6,7 +6,7 @@ import Button from "../components/Button";
 import colors from "../config/colors";
 import Screen from "./Screen";
 
-function WelcomeScreen() {
+function WelcomeScreen({navigation}) {
   return (
     <Screen style={styles.screen}>
       <View style={styles.logoContainer}>
@@ -21,13 +21,13 @@ function WelcomeScreen() {
         <Button
           style={[styles.button]}
           title={"Login"}
-          onPress={() => console.log("login")}
+          onPress={()=>navigation.navigate("Login")}
         />
         <Button
           style={[styles.button, styles.registerButton]}
           title={"Register"}
           textStyle={{ color: colors.green }}
-          onPress={() => console.log("register")}
+          onPress={() => navigation.navigate("Register")}
         />
       </View>
     </Screen>

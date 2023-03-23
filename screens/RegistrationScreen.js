@@ -16,7 +16,7 @@ const validationSchema = Yup.object().shape({
     .label("Confirm Password"),
 });
 
-function RegistrationScreen(props) {
+function RegistrationScreen({ navigation }) {
   return (
     <Screen style={styles.screen}>
       <AppForm
@@ -26,7 +26,7 @@ function RegistrationScreen(props) {
           password: "",
           confirmPassword: "",
         }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => navigation.navigate("ProfileRegistration")}
         validationSchema={validationSchema}
       >
         <AppFormField
@@ -54,14 +54,17 @@ function RegistrationScreen(props) {
           secureTextEntry
           textContentType="password"
         />
-        <SubmitButton title={"Register"} style={styles.button} />
+        <SubmitButton title={"Next"} style={styles.button} />
       </AppForm>
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  screen: {},
+
+  screen: {
+    paddingHorizontal: 15,
+  },
 });
 
 export default RegistrationScreen;

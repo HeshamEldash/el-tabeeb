@@ -5,34 +5,35 @@ import SectionBox from "../components/SectionBox";
 import colors from "../config/colors";
 import Screen from "./Screen";
 
-const SECTIONS = [
-  {
-    title: "Personal Profile",
-    description: "View your personal profile",
-    buttonText: "Go",
-    buttonAction: () => console.log("Medications"),
-  },
-  {
-    title: "Medications",
-    description: "View your medications",
-    buttonText: "Go",
-    buttonAction: () => console.log("Medications"),
-  },
-  {
-    title: "Prescriptions",
-    description: "View your prescriptions",
-    buttonText: "Go",
-    buttonAction: () => console.log("Prescriptions"),
-  },
-  {
-    title: "Documents",
-    description: "Upload your health documents",
-    buttonText: "Go",
-    buttonAction: () => console.log("documents"),
-  },
-];
 
-function SectionsScreen() {
+
+function SectionsScreen({navigation}) {
+  const SECTIONS = [
+    {
+      title: "Personal Profile",
+      description: "View your personal profile",
+      buttonText: "Go",
+      buttonAction: () => console.log("Medications"),
+    },
+    {
+      title: "Medications",
+      description: "View your medications",
+      buttonText: "Go",
+      buttonAction: () => navigation.navigate("Medications"),
+    },
+    {
+      title: "Prescriptions",
+      description: "View your prescriptions",
+      buttonText: "Go",
+      buttonAction: () => console.log("Prescriptions"),
+    },
+    {
+      title: "Documents",
+      description: "Upload your health documents",
+      buttonText: "Go",
+      buttonAction: () => console.log("documents"),
+    },
+  ];
   return (
     <Screen style={styles.screen}>
       <AppText style={styles.title}>Your health record</AppText>
