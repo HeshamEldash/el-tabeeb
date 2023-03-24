@@ -3,8 +3,6 @@ import { StyleSheet } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import SectionsScreen from "../screens/SectionsScreen";
-import WelcomeScreen from "../screens/WelcomeScreen";
 import colors from "../config/colors";
 import SectionsNavigator from "./SectionsNavigator";
 import AuthNavigator from "./AuthNavigator";
