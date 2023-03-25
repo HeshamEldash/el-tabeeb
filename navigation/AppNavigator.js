@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import colors from "../config/colors";
 import SectionsNavigator from "./SectionsNavigator";
 import AuthNavigator from "./AuthNavigator";
+import Account from "../screens/Account";
 
 const Tab = createBottomTabNavigator();
 
@@ -28,8 +29,8 @@ function AppNavigator() {
       />
 
       <Tab.Screen
-        name="Auth"
-        component={AuthNavigator}
+        name="Account"
+        component={Account}
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="account" color={color} size={size} />

@@ -3,6 +3,8 @@ import {View, StyleSheet, Image} from "react-native";
 
 import * as Yup from "yup";
 
+import {login} from "../api/users"
+import useAuth from "../auth/useAuth";
 import AppText from "../components/AppText";
 import AppForm from "../components/forms/Appform";
 import AppFormField from "../components/forms/AppFormField";
@@ -12,11 +14,16 @@ import Screen from "./Screen";
 
 const validationSchema = Yup.object().shape({
     email: Yup.string().required().email().label("Email"),
-    password: Yup.string().required().min(8).label("Password"),
+    password: Yup.string().required().label("Password"),
   });
   
 
 function LoginScreen() {
+  const {logIn, loginFailed} = useAuth()
+
+  const handleLogin = async ({email, password})=>{
+    await logIn(email, password)
+  }
   return (
     <Screen style={styles.screen}>
       <View style={styles.logoContainer}>
@@ -26,7 +33,7 @@ function LoginScreen() {
 
       <AppForm
         initialValues={{ email: "", password: "" }}
-        onSubmit={() => console.log("login")}
+        onSubmit={handleLogin}
         validationSchema={validationSchema}
       >
         <AppFormField

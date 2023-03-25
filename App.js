@@ -7,17 +7,18 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import AuthContext from "./auth/context";
 import AppNavigator from "./navigation/AppNavigator.js";
 import AppLoader from "./components/AppLoader.js";
+import AuthNavigator from "./navigation/AuthNavigator.js";
 
 const queryClient = new QueryClient();
 
 export default function App() {
   return (
     <AppLoader>
-      {(user, setUser) => (
-        <AuthContext.Provider value={{ user, setUser }}>
+      {(user, setUser, isRegistering, setIsRegistering) => (
+        <AuthContext.Provider value={{ user, setUser, isRegistering, setIsRegistering }}>
           <QueryClientProvider client={queryClient}>
             <NavigationContainer theme={navigationTheme}>
-              <AppNavigator />
+              {user && !isRegistering ? <AppNavigator /> : <AuthNavigator />}
             </NavigationContainer>
           </QueryClientProvider>
         </AuthContext.Provider>

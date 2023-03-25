@@ -7,6 +7,7 @@ SplashScreen.preventAutoHideAsync();
 
 function AppLoader({ children }) {
   const [user, setUser] = useState();
+  const [isRegistering, setIsRegistering] = useState(false);
   const [isReady, setIsReady] = useState(false);
 
   const restoreUser = async () => {
@@ -40,7 +41,7 @@ function AppLoader({ children }) {
 
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
-      {children(user, setUser)}
+      {children(user, setUser, isRegistering, setIsRegistering)}
     </View>
   );
 }

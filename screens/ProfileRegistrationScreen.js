@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet } from "react-native";
 import * as Yup from "yup";
 
@@ -9,6 +9,9 @@ import FormDatePicker from "../components/forms/FormDatePicker";
 import SubmitButton from "../components/forms/SubmitButton";
 
 import FormPicker from "../components/forms/FormPicker";
+import { registerProfile } from "../api/users";
+import appDateTime from "../utility/appDateTime";
+import AuthContext from "../auth/context";
 
 const validationSchema = Yup.object().shape({
   first_name: Yup.string().required().label("First Name"),
@@ -16,15 +19,31 @@ const validationSchema = Yup.object().shape({
   last_name: Yup.string().required().label("Last Name"),
   date_of_birth: Yup.date().required().label("Date Of Birth"),
   gender: Yup.string().required().label("Gender"),
-  telephoneNumber: Yup.string().required().label("Telephone Number"),
+  telephone_number: Yup.string().required().label("Telephone Number"),
 });
 
 const gender = [
-  { value: "M", name: "Male" },
-  { value: "F", name: "Female" },
+  { value: "MALE", name: "Male" },
+  { value: "FEMALE", name: "Female" },
 ];
 
 function ProfileRegistrationScreen() {
+  const { user, setIsRegistering } = useContext(AuthContext);
+  const handleSubmit = async (values) => {
+
+    values.date_of_birth = appDateTime.toDate(values.date_of_birth);
+
+    const result = await registerProfile(values, user);
+
+
+    if (result.ok) {
+      setIsRegistering(false);
+      navigation.navigate("Home");
+    } else {
+      console.log("error");
+    }
+
+  };
   return (
     <Screen style={styles.screen}>
       <AppForm
@@ -34,9 +53,9 @@ function ProfileRegistrationScreen() {
           last_name: "",
           date_of_birth: "",
           gender: "",
-          telephoneNumber: "",
+          telephone_number: "",
         }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
         <AppFormField
@@ -50,6 +69,11 @@ function ProfileRegistrationScreen() {
           placeholder="Middle Names"
         />
         <AppFormField name="last_name" icon="account" placeholder="Last Name" />
+        <AppFormField
+          name="telephone_number"
+          icon="phone-log"
+          placeholder="Telephone Number"
+        />
 
         <FormPicker
           items={gender}

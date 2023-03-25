@@ -1,6 +1,8 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet } from "react-native";
 import * as Yup from "yup";
+import { registerAccount } from "../api/users";
+import useAuth from "../auth/useAuth";
 
 import AppForm from "../components/forms/Appform";
 import AppFormField from "../components/forms/AppFormField";
@@ -17,6 +19,33 @@ const validationSchema = Yup.object().shape({
 });
 
 function RegistrationScreen({ navigation }) {
+
+  const { logIn, setIsRegistering} = useAuth();
+
+  const [error, setError] = useState();
+
+  const handleSubmit = async ({ email, password }) => {
+
+    const result = await registerAccount(email, password);
+
+    if (result.ok) {
+      setIsRegistering(true)
+      logIn(email, password);
+      navigation.navigate("ProfileRegistration");
+    }
+
+    if ((result.problem === "CLIENT_ERROR") & (result.status === 409)) {
+      navigation.navigate("Login");
+    }
+
+    if (!result.ok) {
+      if (result.data) setError(result.data.error);
+      else {
+        setError("An unexpected error occurred.");
+      }
+      return;
+    }
+  };
   return (
     <Screen style={styles.screen}>
       <AppForm
@@ -26,7 +55,7 @@ function RegistrationScreen({ navigation }) {
           password: "",
           confirmPassword: "",
         }}
-        onSubmit={(values) => navigation.navigate("ProfileRegistration")}
+        onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
         <AppFormField
@@ -61,7 +90,6 @@ function RegistrationScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-
   screen: {
     paddingHorizontal: 15,
   },
