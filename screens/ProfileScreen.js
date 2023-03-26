@@ -1,7 +1,6 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 
-
 import { useGet } from "../api/apiFunctions";
 import { getProfile } from "../api/users";
 import useAuth from "../auth/useAuth";
@@ -9,8 +8,8 @@ import useAuth from "../auth/useAuth";
 import AppText from "../components/AppText";
 import LabeledContainer from "../components/LabeledContainer";
 import Section from "../components/Section";
+import ErrorScreen from "./ErrorScreen";
 import Screen from "./Screen";
-
 
 function ProfileScreen(props) {
   const { user } = useAuth();
@@ -18,6 +17,8 @@ function ProfileScreen(props) {
   const { data, isLoading, isError, error } = useGet(["profile"], getProfile, {
     patient_id: user,
   });
+
+    if (isError) return  <ErrorScreen/>
 
   return (
     <Screen style={styles.screen}>
