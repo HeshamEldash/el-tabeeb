@@ -2,9 +2,11 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import colors from "../config/colors";
 import AppText from "./AppText";
-
-function Section({ title, children,description, style }) {
+import SectionLoader from "./SectionLoader";
+function Section({ title, children,description, style , isLoading}) {
   return (
+    
+    isLoading ? <SectionLoader/> :
     <View style={[styles.container, style]}>
       <View style={styles.infoSection}>
         <AppText style={styles.subtitle}>{title}</AppText>
@@ -14,6 +16,18 @@ function Section({ title, children,description, style }) {
         {children}
       </View>
     </View>
+
+  
+
+  
+
+
+
+
+
+
+
+
   );
 }
 

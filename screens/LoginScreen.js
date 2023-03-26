@@ -8,6 +8,7 @@ import useAuth from "../auth/useAuth";
 import AppText from "../components/AppText";
 import AppForm from "../components/forms/Appform";
 import AppFormField from "../components/forms/AppFormField";
+import ErrorMessage from "../components/forms/ErrorMessage";
 import SubmitButton from "../components/forms/SubmitButton";
 import colors from "../config/colors";
 import Screen from "./Screen";
@@ -36,6 +37,10 @@ function LoginScreen() {
         onSubmit={handleLogin}
         validationSchema={validationSchema}
       >
+        <ErrorMessage
+          error="Invalid email and/or password."
+          visible={loginFailed}
+        />
         <AppFormField
           name="email"
           icon="email"
