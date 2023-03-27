@@ -3,7 +3,8 @@ import { View, StyleSheet } from 'react-native';
 import AppText from '../components/AppText';
 import Screen from './Screen';
 
-function ErrorScreen(props) {
+function ErrorScreen({error}) {
+
   return (
     <Screen style={styles.container}>
         <AppText style={styles.text}>Oops, an error has occured!</AppText>

@@ -1,21 +1,36 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import AppText from '../components/AppText';
-import Medication from '../components/medications/Medication';
-import MedicationList from '../components/medications/MedicationList';
+import React from "react";
+import { StyleSheet } from "react-native";
+import MedicationList from "../components/medications/MedicationList";
+import SectionBox from "../components/SectionBox";
 
-import Screen from './Screen';
+import Screen from "./Screen";
 
-function MedicationsScreen(props) {
+function MedicationsScreen({ navigation }) {
   return (
-    <Screen>
-          <MedicationList/>
+    <Screen style={styles.screen} dismissKeyboard={false}>
+      {/* <MedicationList/> */}
+
+      <SectionBox
+        title={"Regular Medications"}
+        description={"View Your Regular Medications"}
+        buttonText={"Go"}
+        buttonAction={() => navigation.navigate("Regular Medications")}
+      />
+
+      <SectionBox
+        title={"Prescriptions"}
+        description={"View YourPrescriptions"}
+        buttonText={"Go"}
+        buttonAction={() => navigation.navigate("Prescriptions")}
+      />
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {}
+  screen: {
+    alignItems:"center"
+  },
 });
 
 export default MedicationsScreen;

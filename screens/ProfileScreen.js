@@ -1,24 +1,25 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 import { useGet } from "../api/apiFunctions";
 import { getProfile } from "../api/users";
 import useAuth from "../auth/useAuth";
 
 import AppText from "../components/AppText";
+import Button from "../components/Button";
 import LabeledContainer from "../components/LabeledContainer";
 import Section from "../components/Section";
 import ErrorScreen from "./ErrorScreen";
 import Screen from "./Screen";
 
 function ProfileScreen(props) {
-  const { user } = useAuth();
+  const { user , logOut} = useAuth();
 
   const { data, isLoading, isError, error } = useGet(["profile"], getProfile, {
     patient_id: user,
   });
 
-    if (isError) return  <ErrorScreen/>
+    if (isError) return  <ErrorScreen error={error}/>
 
   return (
     <Screen style={styles.screen}>
@@ -54,6 +55,11 @@ function ProfileScreen(props) {
           );
         })}
       </Section>
+        <View style={styles.buttonsContainer}>
+         <Button style ={styles.button} title={"Logout"} onPress={()=>logOut()}/>
+
+        </View>
+
     </Screen>
   );
 }
@@ -68,6 +74,19 @@ const styles = StyleSheet.create({
   screen: {
     alignItems: "center",
   },
+  buttonsContainer:{
+    marginTop:100,
+    width:350,
+    
+  },
+
+  button:{
+
+    width:200,
+    alignSelf:"flex-start"
+
+    
+  }
 });
 
 export default ProfileScreen;

@@ -7,7 +7,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import colors from "../../config/colors";
 import AppText from "../AppText";
 
-function Medication({ name, dose }) {
+function Medication({ medication }) {
   const swipeableRef = useRef();
 
   const renderRightActions = (progress, dragX) => {
@@ -28,12 +28,13 @@ function Medication({ name, dose }) {
       <Swipeable renderRightActions={renderRightActions} ref={swipeableRef}>
         <View style={styles.container}>
           <View style={styles.detailBox}>
-            <AppText style={styles.name}>{name}</AppText>
-            <AppText style={styles.dose}>{dose}</AppText>
+            <AppText style={styles.name}>{medication?.name}</AppText>
+            <AppText style={styles.dose}>{medication?.dose}</AppText>
+            <AppText style={styles.dose}>{medication?.date_created}</AppText>
           </View>
         </View>
-      </Swipeable>
-    </GestureHandlerRootView>
+    </Swipeable>
+ </GestureHandlerRootView>
   );
 }
 

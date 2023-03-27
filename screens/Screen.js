@@ -17,10 +17,14 @@ function Screen({ children, style, dismissKeyboard = true }) {
 
   return (
     <SafeAreaView style={[styles.screen, style]}>
-      <TouchableWithoutFeedback onPress={handleKeyboard}>
+      {dismissKeyboard ? (
+        <TouchableWithoutFeedback onPress={handleKeyboard}>
+          <View style={[styles.view, style]}>{children}</View>
+        </TouchableWithoutFeedback>
+      ) : (
         <View style={[styles.view, style]}>{children}</View>
-      </TouchableWithoutFeedback>
-    </SafeAreaView> 
+      )}
+    </SafeAreaView>
   );
 }
 
