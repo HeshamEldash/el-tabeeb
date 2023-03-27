@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     paddingVertical:5,
     width: "100%",
     marginVertical: 10,
+    flexWrap:"wrap"
   },
   buttonText: {
     color:colors.white

@@ -1,13 +1,15 @@
 import React from "react";
-import { View, StyleSheet, FlatList } from "react-native";
+import { BulletList } from "react-content-loader/native";
+import {StyleSheet, FlatList } from "react-native";
 import { useGet } from "../api/apiFunctions";
 import medicationdApi from "../api/medicationdApi";
 import useAuth from "../auth/useAuth";
+import AppText from "../components/AppText";
 import PrescriptionItem from "../components/medications/PrescriptionItem";
 
 import Screen from "./Screen";
 
-function PrescriptionsScreen(props) {
+function PrescriptionsScreen() {
   const { user } = useAuth();
   const { data, isLoading, isError, error } = useGet(
     ["prescriptions"],
@@ -17,13 +19,18 @@ function PrescriptionsScreen(props) {
     }
   );
 
+  if (isLoading) return <BulletList />;
+  
+
+  
   return (
     <Screen style={styles.screen} dismissKeyboard={false}>
+      {data.length === 0? <AppText>You don't have any prescriptions</AppText> :
       <FlatList
         inverted={true}
         data={data}
         renderItem={({ item }) => <PrescriptionItem prescription={item} />}
-      />
+      />}
     </Screen>
   );
 }

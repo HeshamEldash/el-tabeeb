@@ -10,6 +10,7 @@ import MedicationList from "../components/medications/MedicationList";
 import RegularMedicationsScreen from "../screens/RegularMedicationsScreen";
 import PrescriptionsScreen from "../screens/PrescriptionsScreen";
 import PrescriptionScreen from "../screens/PrescriptionScreen";
+import MedicationAddScreen from "../screens/MedicationAddScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -29,6 +30,7 @@ function SectionsNavigator() {
       <Stack.Screen name={"Regular Medications"} component={RegularMedicationsScreen} />
       <Stack.Screen name={"Prescriptions"} component={PrescriptionsScreen} />
       <Stack.Screen name={"Prescription"} component={PrescriptionScreen} />
+      <Stack.Screen name={"Edit medication"} component={MedicationAddScreen} options={{ presentation: 'modal' }} />
     </Stack.Navigator>
   );
 }

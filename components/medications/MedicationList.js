@@ -14,21 +14,24 @@ function MedicationList(props) {
   const { data, isLoading, isError, error } = useGet(
     ["regular-medications"],
     medicationdApi.getRegularMedications,
-    { patient_id: user }
+    { patient_id: 1 }
   );
 
   if (isLoading) return <BulletList />;
 
   return (
     <View style={styles.container}>
-      <AppText style={styles.title}>Repeat Medications</AppText>
       {data.length === 0 ? (
         <AppText>You don't have any medications</AppText>
       ) : (
-        <FlatList
-          data={data}
-          renderItem={({ item }) => <Medication key={item} medication={item} />}
-        />
+        <View style={styles.list}>
+          <FlatList
+            data={data}
+            renderItem={({ item }) => (
+              <Medication key={item} medication={item} />
+            )}
+          />
+        </View>
       )}
     </View>
   );
@@ -44,6 +47,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginBottom: 25,
     textTransform: "capitalize",
+  },
+  list: {
+    paddingVertical: 30,
+    height: "95%",
   },
 });
 
