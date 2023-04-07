@@ -28,6 +28,7 @@ function RegistrationScreen({ navigation }) {
 
     const result = await registerAccount(email, password);
 
+
     if (result.ok) {
       setIsRegistering(true)
       logIn(email, password);

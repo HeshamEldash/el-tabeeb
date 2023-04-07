@@ -13,7 +13,7 @@ function SectionsScreen({navigation}) {
       title: "Personal Profile",
       description: "View your personal profile",
       buttonText: "Go",
-      buttonAction: () => console.log("Medications"),
+      buttonAction: () => navigation.navigate("MedicalProfileScreen"),
     },
     {
       title: "Medications",

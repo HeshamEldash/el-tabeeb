@@ -10,15 +10,24 @@ import Medication from "./Medication";
 import medicationdApi from "../../api/medicationdApi";
 
 function MedicationList(props) {
-  const { user } = useAuth();
-  const { data, isLoading, isError, error } = useGet(
-    ["regular-medications"],
+  const { user, profileData } = useAuth();
+
+  const { data:prescribedRegularMeds, isLoading, isError, error } = useGet(
+    ["prescribed-regular-medications"],
     medicationdApi.getRegularMedications,
-    { patient_id: 1 }
+    { patient_id: profileData?.id }
+  );
+
+  const { data:patientAddedMeds, isLoading:patientAddedMedsisLoading, isError:patientAddedMedsisLoadingisError, error:patientAddedMedsError } = useGet(
+    ["patient-regular-medications"],
+    medicationdApi.getPatientAddedMedication,
+    { patient_id: profileData?.id }
   );
 
   if (isLoading) return <BulletList />;
 
+
+  const data = [...prescribedRegularMeds, ...patientAddedMeds]
   return (
     <View style={styles.container}>
       {data.length === 0 ? (
@@ -26,6 +35,7 @@ function MedicationList(props) {
       ) : (
         <View style={styles.list}>
           <FlatList
+            // data={patientAddedMeds}
             data={data}
             renderItem={({ item }) => (
               <Medication key={item} medication={item} />

@@ -8,10 +8,15 @@ import AuthContext from "./auth/context";
 import AppNavigator from "./navigation/AppNavigator.js";
 import AppLoader from "./components/AppLoader.js";
 import AuthNavigator from "./navigation/AuthNavigator.js";
+import Button from "./components/Button.js";
+import MedicalProfileScreen from "./screens/MedicalProfileScreen.js";
 
 const queryClient = new QueryClient();
 
 export default function App() {
+
+  // return <MedicalProfileScreen/>
+
   return (
     <AppLoader>
       {(user, setUser, isRegistering, setIsRegistering) => (

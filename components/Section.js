@@ -17,16 +17,6 @@ function Section({ title, children,description, style , isLoading}) {
       </View>
     </View>
 
-  
-
-  
-
-
-
-
-
-
-
 
   );
 }

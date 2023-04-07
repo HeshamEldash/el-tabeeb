@@ -10,10 +10,10 @@ export const useGet = (qKey, getterFunc, params) => {
   };
 
 
-export const usePost = (posterFunc, qKey) => {
+export const usePost = (posterFunc, qKey , params=null) => {
     const queryClient = useQueryClient();
     return useMutation({
-      mutationFn: (data) => posterFunc(data),
+      mutationFn: (data) => posterFunc(data, params),
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: qKey });
       },

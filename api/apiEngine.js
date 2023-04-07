@@ -1,7 +1,7 @@
 import axios from "axios";
 import authStorage from "../auth/storage";
 
-const BASEURL = "http://192.168.1.188:8000/app-api/patient";
+const BASEURL = "http://192.168.1.29:8001/app-api/patient";
 
 const token = async () => {
   const authToken = await authStorage.getToken();
@@ -28,19 +28,16 @@ const put = async (endPoint, headers, data, params) => {
   }
 };
 
-const post = async (endPoint, headers, data, params) => {
+const post = async (endPoint, data, params) => {
   try {
-    const response = await axios.post(
-      `${BASEURL}${endPoint}`,
-      {
-        headers: {
-          "Content-type": "application/json",
-          ...headers,
-        },
+    const response = await axios.post(`${BASEURL}${endPoint}`, data, {
+      params: params,
+      headers: {
+        "Content-type": "application/json",
+        Authorization: "Bearer " + (await token()),
       },
-      params,
-      data
-    );
+    });
+
     return response.data;
   } catch (error) {
     throw error;
@@ -65,13 +62,13 @@ const del = async (endPoint, headers, params) => {
   }
 };
 
-const get = async (endPoint,  params) => {
+const get = async (endPoint, params) => {
   try {
     const response = await axios.get(`${BASEURL}${endPoint}`, {
-      params:params,
+      params: params,
       headers: {
         "Content-type": "application/json",
-        Authorization: "Bearer " + await token(),
+        Authorization: "Bearer " + (await token()),
       },
     });
     return response.data;

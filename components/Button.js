@@ -21,10 +21,10 @@ const styles = StyleSheet.create({
     paddingVertical:5,
     width: "100%",
     marginVertical: 10,
-    flexWrap:"wrap"
+    // flexWrap:"wrap"
   },
   buttonText: {
-    color:colors.white
+    color:colors.white,
   },
 });
 

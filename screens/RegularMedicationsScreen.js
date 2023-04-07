@@ -8,7 +8,7 @@ import AppText from "../components/AppText";
 import Button from "../components/Button";
 import MedicationAddScreen from "./MedicationAddScreen";
 
-function RegularMedicationsScreen({ navigation }) {
+function RegularMedicationsScreen() {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <Screen style={styles.screen} dismissKeyboard={false}>

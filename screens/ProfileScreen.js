@@ -12,7 +12,7 @@ import Section from "../components/Section";
 import ErrorScreen from "./ErrorScreen";
 import Screen from "./Screen";
 
-function ProfileScreen(props) {
+function ProfileScreen() {
   const { user , logOut} = useAuth();
 
   const { data, isLoading, isError, error } = useGet(["profile"], getProfile, {
@@ -38,6 +38,7 @@ function ProfileScreen(props) {
 
         <LabeledContainer label={"Date of birth"}>
           <AppText>{data?.date_of_birth}</AppText>
+
         </LabeledContainer>
 
         <LabeledContainer label={"gender"}>

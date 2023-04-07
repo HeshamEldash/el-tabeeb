@@ -11,6 +11,7 @@ import RegularMedicationsScreen from "../screens/RegularMedicationsScreen";
 import PrescriptionsScreen from "../screens/PrescriptionsScreen";
 import PrescriptionScreen from "../screens/PrescriptionScreen";
 import MedicationAddScreen from "../screens/MedicationAddScreen";
+import MedicalProfileScreen from "../screens/MedicalProfileScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +27,9 @@ function SectionsNavigator() {
           headerShown: false,
         }}
       />
+      <Stack.Screen name={"MedicalProfileScreen"} component={MedicalProfileScreen} 
+      options={{headerTitle:"Medical Profile"}} />
+
       <Stack.Screen name={"Medications"} component={MedicationsScreen} />
       <Stack.Screen name={"Regular Medications"} component={RegularMedicationsScreen} />
       <Stack.Screen name={"Prescriptions"} component={PrescriptionsScreen} />

@@ -1,72 +1,63 @@
 import React from "react";
 import { View, StyleSheet, Modal } from "react-native";
+import * as Yup from "yup";
 
 import AppText from "../components/AppText";
 import colors from "../config/colors";
 import AppForm from "../components/forms/Appform";
 import AppFormField from "../components/forms/AppFormField";
 import SubmitButton from "../components/forms/SubmitButton";
+import { usePost } from "../api/apiFunctions";
+import medicationdApi from "../api/medicationdApi";
+import useAuth from "../auth/useAuth";
+import ErrorMessage from "../components/forms/ErrorMessage";
+import AppModal from "../components/AppModal";
 
+const validationSchema = Yup.object().shape({
+  name: Yup.string().required().label("Medication Name"),
+  dose: Yup.string().required().label("Medication Dose"),
+});
 
 function MedicationAddScreen({ isVisible, setIsVisible }) {
+  const { profileData } = useAuth();
+
+  const { mutate, isError, isSuccess, status, isLoading } = usePost(
+    medicationdApi.addRegularMedication,
+    ["patient-regular-medications"],
+    profileData?.id
+  );
+
+  const handleSubmit = (values) => {
+    mutate(values);
+    isSuccess && setIsVisible(false);
+  };
+
   return (
-    <Modal
-      visible={isVisible}
-      transparent={true}
-      onRequestClose={() => setIsVisible(!isVisible)}
-      animationType="fade"
+    <AppModal
+      isVisible={isVisible}
+      setIsVisible={setIsVisible}
+      title={"Repeat Medications"}
     >
-      <View style={styles.modal}></View>
-      <View style={styles.modalContent}>
-        <AppText style={styles.modalTitle}>Repeat Medications</AppText>
+      <ErrorMessage error={"Sorry, an error occured"} visible={isError} />
 
-        <AppForm
-          initialValues={{
-            name: "",
-            dose: "",
-          }}
-          onSubmit={(values) => console.log(values)}
-        >
-          <AppFormField name="name" placeholder="Medication Name" />
+      <AppForm
+        initialValues={{
+          name: "",
+          dose: "",
+        }}
+        onSubmit={handleSubmit}
+        validationSchema={validationSchema}
+      >
+        <AppFormField name="name" placeholder="Medication Name" />
 
-          <AppFormField name="dose" placeholder="Medication Dose" />
+        <AppFormField name="dose" placeholder="Medication Dose" />
 
-          <SubmitButton title={"Add"} style={styles.button} />
-        </AppForm>
-      </View>
-    </Modal>
+        <SubmitButton title={"Add"} />
+      </AppForm>
+    </AppModal>
   );
 }
 
-const styles = StyleSheet.create({
-  button: {
-    alignContent: "center",
-  },
-  modalTitle: {
-    fontWeight: "800",
-    fontSize: 20,
-    marginBottom: 25,
-    textTransform: "capitalize",
-    margin: 10,
-  },
-  modal: {
-    backgroundColor: colors.light,
-    opacity: 0.7,
-    flex: 1,
-  },
-  modalContent: {
-    position: "absolute",
-    bottom: 20,
-    width: "95%",
-    backgroundColor: colors.white,
-    alignItems: "center",
-    alignSelf: "center",
-    minHeight: 400,
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: colors.lightGrey,
-    paddingHorizontal: 10,
-  },
-});
+const styles = StyleSheet.create({});
 
 export default MedicationAddScreen;
