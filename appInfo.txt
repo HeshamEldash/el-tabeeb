@@ -1,0 +1,5 @@
+AUTH: 
+    -patient_id is in the token and and in the use auth 
+    -to access patient_id for api calls  const {profileId} = useAuth();
+    -apiClient can be used to make auth calls, the headers are configered properly
+

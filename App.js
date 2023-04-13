@@ -18,17 +18,17 @@ export default function App() {
   // return <MedicalProfileScreen/>
 
   return (
-    <AppLoader>
-      {(user, setUser, isRegistering, setIsRegistering) => (
-        <AuthContext.Provider value={{ user, setUser, isRegistering, setIsRegistering }}>
           <QueryClientProvider client={queryClient}>
+    <AppLoader>
+      {(user, setUser, isRegistering, setIsRegistering, profileId) => (
+        <AuthContext.Provider value={{ user, setUser, isRegistering, setIsRegistering, profileId }}>
             <NavigationContainer theme={navigationTheme}>
               {user && !isRegistering ? <AppNavigator /> : <AuthNavigator />}
             </NavigationContainer>
-          </QueryClientProvider>
         </AuthContext.Provider>
       )}
     </AppLoader>
+          </QueryClientProvider>
   );
 }
 const styles = StyleSheet.create({

@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import authStorage from "../auth/storage.js";
+import { useGet } from "../api/apiFunctions.js";
+import { getProfileApiSauce } from "../api/users.js";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -9,10 +11,15 @@ function AppLoader({ children }) {
   const [user, setUser] = useState();
   const [isRegistering, setIsRegistering] = useState(false);
   const [isReady, setIsReady] = useState(false);
+  const [profileId, setProfileId]= useState()
 
   const restoreUser = async () => {
-    const user = await authStorage.getUser();
-    if (user) setUser(user);
+    const user = await authStorage.getUser(); 
+    const profile_id = await authStorage.getPatinetProfileId()
+
+    if (user) setUser(user)
+    if (profile_id) setProfileId(profile_id)
+    
   };
 
   useEffect(() => {
@@ -41,7 +48,7 @@ function AppLoader({ children }) {
 
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
-      {children(user, setUser, isRegistering, setIsRegistering)}
+      {children(user, setUser, isRegistering, setIsRegistering, profileId)}
     </View>
   );
 }

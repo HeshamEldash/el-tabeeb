@@ -1,9 +1,6 @@
 import React from "react";
-import { View, StyleSheet, Modal } from "react-native";
 import * as Yup from "yup";
 
-import AppText from "../components/AppText";
-import colors from "../config/colors";
 import AppForm from "../components/forms/Appform";
 import AppFormField from "../components/forms/AppFormField";
 import SubmitButton from "../components/forms/SubmitButton";
@@ -19,12 +16,12 @@ const validationSchema = Yup.object().shape({
 });
 
 function MedicationAddScreen({ isVisible, setIsVisible }) {
-  const { profileData } = useAuth();
+  const { profileId } = useAuth();
 
   const { mutate, isError, isSuccess, status, isLoading } = usePost(
     medicationdApi.addRegularMedication,
     ["patient-regular-medications"],
-    profileData?.id
+    profileId
   );
 
   const handleSubmit = (values) => {
@@ -58,6 +55,5 @@ function MedicationAddScreen({ isVisible, setIsVisible }) {
   );
 }
 
-const styles = StyleSheet.create({});
 
 export default MedicationAddScreen;

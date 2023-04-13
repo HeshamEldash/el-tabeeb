@@ -10,27 +10,29 @@ import Medication from "./Medication";
 import medicationdApi from "../../api/medicationdApi";
 
 function MedicationList(props) {
-  const { user, profileData } = useAuth();
+  const {profileId} = useAuth();
 
-  const { data:prescribedRegularMeds, isLoading, isError, error } = useGet(
+  const { data:prescribedRegularMeds, isLoading:isLoading, isError, error } = useGet(
     ["prescribed-regular-medications"],
     medicationdApi.getRegularMedications,
-    { patient_id: profileData?.id }
+    { patient_id: profileId}
   );
 
   const { data:patientAddedMeds, isLoading:patientAddedMedsisLoading, isError:patientAddedMedsisLoadingisError, error:patientAddedMedsError } = useGet(
     ["patient-regular-medications"],
     medicationdApi.getPatientAddedMedication,
-    { patient_id: profileData?.id }
+    { patient_id: profileId }
   );
 
-  if (isLoading) return <BulletList />;
+  if (isLoading || patientAddedMedsisLoading) return <BulletList />;
 
 
   const data = [...prescribedRegularMeds, ...patientAddedMeds]
+
+
   return (
     <View style={styles.container}>
-      {data.length === 0 ? (
+      {data?.length === 0 ? (
         <AppText>You don't have any medications</AppText>
       ) : (
         <View style={styles.list}>

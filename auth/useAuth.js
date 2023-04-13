@@ -7,7 +7,7 @@ import authStorage from "./storage";
 import { useGet } from "../api/apiFunctions";
 
 export default useAuth = () => {
-  const { user, setUser, isRegistering, setIsRegistering } =
+  const { user, setUser, isRegistering, setIsRegistering, profileId } =
     useContext(AuthContext);
   const [loginFailed, setLoginFailed] = useState(false);
 
@@ -33,9 +33,7 @@ export default useAuth = () => {
     authStorage.removeToken();
   };
 
-  const { data:profileData, isLoading, isError, error } = useGet(["profile"], getProfile, {
-    patient_id: user,
-  });
 
-  return { user, logIn, logOut, loginFailed, isRegistering, setIsRegistering, profileData };
+
+  return { user, logIn, logOut, loginFailed, isRegistering, setIsRegistering, profileId };
 };

@@ -1,7 +1,7 @@
 import { create } from "apisauce";
 import authStorage from "../auth/storage";
 const apiClient = create({
-  baseURL: "http://192.168.1.29:8001/app-api/patient",
+  baseURL: "http://192.168.100.19:8001/app-api/patient",
   headers: {
     "Content-type": "application/json",
   },
@@ -10,7 +10,7 @@ const apiClient = create({
 apiClient.addAsyncRequestTransform(async (request) => {
   const authToken = await authStorage.getToken();
   if (!authToken) return;
-  request.headers["Bearer"] = authToken.access;
+  request.headers["Authorization"] = "Bearer " + JSON.parse(authToken).access;
 });
 
 export default apiClient;

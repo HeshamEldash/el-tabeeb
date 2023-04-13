@@ -1,7 +1,7 @@
 import axios from "axios";
 import authStorage from "../auth/storage";
 
-const BASEURL = "http://192.168.1.29:8001/app-api/patient";
+const BASEURL = "http://192.168.100.19:8001/app-api/patient";
 
 const token = async () => {
   const authToken = await authStorage.getToken();

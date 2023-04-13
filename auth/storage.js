@@ -24,6 +24,11 @@ const getUser = async () => {
   return token ? jwtDecode(token).user_id : null;
 };
 
+const getPatinetProfileId = async () => {
+  const token = await getToken();
+  return token ? jwtDecode(token).patient_id : null;
+};
+
 const removeToken = async () => {
   try {
     await SecureStore.deleteItemAsync(key);
@@ -32,4 +37,4 @@ const removeToken = async () => {
   }
 };
 
-export default { getToken, getUser, removeToken, storeToken };
+export default { getToken,getPatinetProfileId, getUser, removeToken, storeToken };
